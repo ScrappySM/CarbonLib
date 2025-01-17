@@ -214,7 +214,8 @@ inline T* GetFunc(const char* name) {
 /// <returns>The new Lua state.</returns>
 inline lua_State* lua_newstate(lua_Alloc f, void* ud) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_newstate_t>("lua_newstate")(f, ud);
+	static auto fn = GetFunc<lua_newstate_t>("lua_newstate");
+	return fn(f, ud);
 }
 
 /// <summary>
@@ -224,7 +225,8 @@ inline lua_State* lua_newstate(lua_Alloc f, void* ud) {
 /// <returns></returns>
 inline void lua_close(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_close_t>("lua_close")(L);
+	static auto fn = GetFunc<lua_close_t>("lua_close");
+	return fn(L);
 }
 
 /// <summary>
@@ -234,7 +236,8 @@ inline void lua_close(lua_State* L) {
 /// <returns>The new thread.</returns>
 inline lua_State* lua_newthread(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_newthread_t>("lua_newthread")(L);
+	static auto fn = GetFunc<lua_newthread_t>("lua_newthread");
+	return fn(L);
 }
 
 /// <summary>
@@ -245,7 +248,8 @@ inline lua_State* lua_newthread(lua_State* L) {
 /// <returns>The old panic function.</returns>
 inline lua_CFunction lua_atpanic(lua_State* L, lua_CFunction panicf) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_atpanic_t>("lua_atpanic")(L, panicf);
+	static auto fn = GetFunc<lua_atpanic_t>("lua_atpanic");
+	return fn(L, panicf);
 }
 
 /// ================== ///
@@ -259,7 +263,8 @@ inline lua_CFunction lua_atpanic(lua_State* L, lua_CFunction panicf) {
 /// <returns>The top index of the stack.</returns>
 inline int lua_gettop(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_gettop_t>("lua_gettop")(L);
+	static auto fn = GetFunc<lua_gettop_t>("lua_gettop");
+	return fn(L);
 }
 
 /// <summary>
@@ -270,7 +275,8 @@ inline int lua_gettop(lua_State* L) {
 /// <returns></returns>
 inline void lua_settop(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_settop_t>("lua_settop")(L, index);
+	static auto fn = GetFunc<lua_settop_t>("lua_settop");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -281,7 +287,8 @@ inline void lua_settop(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_pushvalue(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushvalue_t>("lua_pushvalue")(L, index);
+	static auto fn = GetFunc<lua_pushvalue_t>("lua_pushvalue");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -292,7 +299,8 @@ inline void lua_pushvalue(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_remove(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_remove_t>("lua_remove")(L, index);
+	static auto fn = GetFunc<lua_remove_t>("lua_remove");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -303,7 +311,8 @@ inline void lua_remove(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_insert(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_insert_t>("lua_insert")(L, index);
+	static auto fn = GetFunc<lua_insert_t>("lua_insert");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -314,7 +323,8 @@ inline void lua_insert(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_replace(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_replace_t>("lua_replace")(L, index);
+	static auto fn = GetFunc<lua_replace_t>("lua_replace");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -325,7 +335,8 @@ inline void lua_replace(lua_State* L, int index) {
 /// <returns>1 if there is enough space, 0 otherwise.</returns>
 inline int lua_checkstack(lua_State* L, int sz) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_checkstack_t>("lua_checkstack")(L, sz);
+	static auto fn = GetFunc<lua_checkstack_t>("lua_checkstack");
+	return fn(L, sz);
 }
 
 /// <summary>
@@ -339,7 +350,8 @@ inline int lua_checkstack(lua_State* L, int sz) {
 /// <returns></returns>
 inline void lua_xmove(lua_State* from, lua_State* to, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_xmove_t>("lua_xmove")(from, to, n);
+	static auto fn = GetFunc<lua_xmove_t>("lua_xmove");
+	return fn(from, to, n);
 }
 
 /// ============================= ///
@@ -354,7 +366,8 @@ inline void lua_xmove(lua_State* from, lua_State* to, int n) {
 /// <returns>1 if the value is a number, 0 otherwise.</returns>
 inline int lua_isnumber(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_isnumber_t>("lua_isnumber")(L, index);
+	static auto fn = GetFunc<lua_isnumber_t>("lua_isnumber");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -365,7 +378,8 @@ inline int lua_isnumber(lua_State* L, int index) {
 /// <returns>1 if the value is a string, 0 otherwise.</returns>
 inline int lua_isstring(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_isstring_t>("lua_isstring")(L, index);
+	static auto fn = GetFunc<lua_isstring_t>("lua_isstring");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -376,7 +390,8 @@ inline int lua_isstring(lua_State* L, int index) {
 /// <returns>1 if the value is a C function, 0 otherwise.</returns>
 inline int lua_iscfunction(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_iscfunction_t>("lua_iscfunction")(L, index);
+	static auto fn = GetFunc<lua_iscfunction_t>("lua_iscfunction");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -387,7 +402,8 @@ inline int lua_iscfunction(lua_State* L, int index) {
 /// <returns>1 if the value is a user data (full or light), 0 otherwise.</returns>
 inline int lua_isuserdata(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_isuserdata_t>("lua_isuserdata")(L, index);
+	static auto fn = GetFunc<lua_isuserdata_t>("lua_isuserdata");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -398,7 +414,8 @@ inline int lua_isuserdata(lua_State* L, int index) {
 /// <returns>The type of the value (LUA_TNIL, LUA_TBOOLEAN, LUA_TLIGHTUSERDATA, LUA_TNUMBER, LUA_TSTRING, LUA_TTABLE, LUA_TFUNCTION, LUA_TUSERDATA, LUA_TTHREAD).</returns>
 inline int lua_type(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_type_t>("lua_type")(L, index);
+	static auto fn = GetFunc<lua_type_t>("lua_type");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -409,7 +426,8 @@ inline int lua_type(lua_State* L, int index) {
 /// <returns>The type name as a string literal.</returns>
 inline const char* lua_typename(lua_State* L, int tp) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_typename_t>("lua_typename")(L, tp);
+	static auto fn = GetFunc<lua_typename_t>("lua_typename");
+	return fn(L, tp);
 }
 
 /// <summary>
@@ -421,7 +439,8 @@ inline const char* lua_typename(lua_State* L, int tp) {
 /// <returns>1 if the values are equal, 0 otherwise.</returns>
 inline int lua_equal(lua_State* L, int index1, int index2) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_equal_t>("lua_equal")(L, index1, index2);
+	static auto fn = GetFunc<lua_equal_t>("lua_equal");
+	return fn(L, index1, index2);
 }
 
 /// <summary>
@@ -433,7 +452,8 @@ inline int lua_equal(lua_State* L, int index1, int index2) {
 /// <returns>1 if the values are equal, 0 otherwise.</returns>
 inline int lua_rawequal(lua_State* L, int index1, int index2) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_rawequal_t>("lua_rawequal")(L, index1, index2);
+	static auto fn = GetFunc<lua_rawequal_t>("lua_rawequal");
+	return fn(L, index1, index2);
 }
 
 /// <summary>
@@ -445,7 +465,8 @@ inline int lua_rawequal(lua_State* L, int index1, int index2) {
 /// <returns>1 if the first value is less than the second value, 0 otherwise.</returns>
 inline int lua_lessthan(lua_State* L, int index1, int index2) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_lessthan_t>("lua_lessthan")(L, index1, index2);
+	static auto fn = GetFunc<lua_lessthan_t>("lua_lessthan");
+	return fn(L, index1, index2);
 }
 
 /// <summary>
@@ -456,7 +477,8 @@ inline int lua_lessthan(lua_State* L, int index1, int index2) {
 /// <returns>The number as a `lua_Number` (default float), returns 0 if the value is not a number.</returns>
 inline lua_Number lua_tonumber(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_tonumber_t>("lua_tonumber")(L, index);
+	static auto fn = GetFunc<lua_tonumber_t>("lua_tonumber");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -467,7 +489,8 @@ inline lua_Number lua_tonumber(lua_State* L, int index) {
 /// <returns>The integer as a `lua_Integer` (default ptrdiff_t).</returns>
 inline lua_Integer lua_tointeger(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_tointeger_t>("lua_tointeger")(L, index);
+	static auto fn = GetFunc<lua_tointeger_t>("lua_tointeger");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -478,7 +501,8 @@ inline lua_Integer lua_tointeger(lua_State* L, int index) {
 /// <returns>The boolean as an integer (0 or 1), anything other than `false` and `nil` is true.</returns>
 inline int lua_toboolean(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_toboolean_t>("lua_toboolean")(L, index);
+	static auto fn = GetFunc<lua_toboolean_t>("lua_toboolean");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -491,7 +515,8 @@ inline int lua_toboolean(lua_State* L, int index) {
 /// <returns>The string as a `const char*`.</returns>
 inline const char* lua_tolstring(lua_State* L, int index, size_t* len) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_tolstring_t>("lua_tolstring")(L, index, len);
+	static auto fn = GetFunc<lua_tolstring_t>("lua_tolstring");
+	return fn(L, index, len);
 }
 
 /// <summary>
@@ -504,7 +529,8 @@ inline const char* lua_tolstring(lua_State* L, int index, size_t* len) {
 /// <returns>The length of the value, returns 0 for other types.</returns>
 inline size_t lua_objlen(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_objlen_t>("lua_objlen")(L, index);
+	static auto fn = GetFunc<lua_objlen_t>("lua_objlen");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -515,7 +541,8 @@ inline size_t lua_objlen(lua_State* L, int index) {
 /// <returns>The C function as a `lua_CFunction`, if it's not a C function, returns `nullptr`.</returns>
 inline lua_CFunction lua_tocfunction(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_tocfunction_t>("lua_tocfunction")(L, index);
+	static auto fn = GetFunc<lua_tocfunction_t>("lua_tocfunction");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -526,7 +553,8 @@ inline lua_CFunction lua_tocfunction(lua_State* L, int index) {
 /// <returns>The user data as a `void*`, full userdata returns block address, light returns pointer, otherwise returns `nullptr`.</returns>
 inline void* lua_touserdata(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_touserdata_t>("lua_touserdata")(L, index);
+	static auto fn = GetFunc<lua_touserdata_t>("lua_touserdata");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -537,7 +565,8 @@ inline void* lua_touserdata(lua_State* L, int index) {
 /// <returns>The thread as a `lua_State*`, returning `nullptr` if the value is not a thread.</returns>
 inline lua_State* lua_tothread(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_tothread_t>("lua_tothread")(L, index);
+	static auto fn = GetFunc<lua_tothread_t>("lua_tothread");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -550,7 +579,8 @@ inline lua_State* lua_tothread(lua_State* L, int index) {
 /// <returns>The pointer as a `const void*`, `nullptr` if the value is not a userdata, table, thread or function.</returns>
 inline const void* lua_topointer(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_topointer_t>("lua_topointer")(L, index);
+	static auto fn = GetFunc<lua_topointer_t>("lua_topointer");
+	return fn(L, index);
 }
 
 /// =========================== ///
@@ -564,7 +594,8 @@ inline const void* lua_topointer(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_pushnil(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushnil_t>("lua_pushnil")(L);
+	static auto fn = GetFunc<lua_pushnil_t>("lua_pushnil");
+	return fn(L);
 }
 
 /// <summary>
@@ -575,7 +606,8 @@ inline void lua_pushnil(lua_State* L) {
 /// <returns></returns>
 inline void lua_pushnumber(lua_State* L, lua_Number n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushnumber_t>("lua_pushnumber")(L, n);
+	static auto fn = GetFunc<lua_pushnumber_t>("lua_pushnumber");
+	return fn(L, n);
 }
 
 /// <summary>
@@ -586,7 +618,8 @@ inline void lua_pushnumber(lua_State* L, lua_Number n) {
 /// <returns></returns>
 inline void lua_pushinteger(lua_State* L, lua_Integer n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushinteger_t>("lua_pushinteger")(L, n);
+	static auto fn = GetFunc<lua_pushinteger_t>("lua_pushinteger");
+	return fn(L, n);
 }
 
 /// <summary>
@@ -600,7 +633,8 @@ inline void lua_pushinteger(lua_State* L, lua_Integer n) {
 /// <returns></returns>
 inline void lua_pushlstring(lua_State* L, const char* s, size_t l) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushlstring_t>("lua_pushlstring")(L, s, l);
+	static auto fn = GetFunc<lua_pushlstring_t>("lua_pushlstring");
+	return fn(L, s, l);
 }
 
 /// <summary>
@@ -613,7 +647,8 @@ inline void lua_pushlstring(lua_State* L, const char* s, size_t l) {
 /// <returns></returns>
 inline void lua_pushstring(lua_State* L, const char* s) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushstring_t>("lua_pushstring")(L, s);
+	static auto fn = GetFunc<lua_pushstring_t>("lua_pushstring");
+	return fn(L, s);
 }
 
 /// <summary>
@@ -625,7 +660,8 @@ inline void lua_pushstring(lua_State* L, const char* s) {
 /// <param name="argp">The arguments.</param>
 inline const char* lua_pushvfstring(lua_State* L, const char* fmt, va_list argp) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_pushvfstring_t>("lua_pushvfstring")(L, fmt, argp);
+	static auto fn = GetFunc<lua_pushvfstring_t>("lua_pushvfstring");
+	return fn(L, fmt, argp);
 }
 
 /// <summary>
@@ -640,7 +676,8 @@ inline const char* lua_pushfstring(lua_State* L, const char* fmt, ...) {
 	using namespace Carbon::Lua::Prototypes;
 	va_list argp;
 	va_start(argp, fmt);
-	const char* ret = GetFunc<lua_pushvfstring_t>("lua_pushvfstring")(L, fmt, argp);
+	static auto fn = GetFunc<lua_pushvfstring_t>("lua_pushvfstring");
+	const char* ret = fn(L, fmt, argp);
 	va_end(argp);
 	return ret;
 }
@@ -658,7 +695,8 @@ inline const char* lua_pushfstring(lua_State* L, const char* fmt, ...) {
 /// <returns></returns>
 inline void lua_pushcclosure(lua_State* L, lua_CFunction fn, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushcclosure_t>("lua_pushcclosure")(L, fn, n);
+	static auto l_fn = GetFunc<lua_pushcclosure_t>("lua_pushcclosure");
+	return l_fn(L, fn, n);
 }
 
 /// <summary>
@@ -669,7 +707,8 @@ inline void lua_pushcclosure(lua_State* L, lua_CFunction fn, int n) {
 /// <returns></returns>
 inline void lua_pushboolean(lua_State* L, int b) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushboolean_t>("lua_pushboolean")(L, b);
+	static auto fn = GetFunc<lua_pushboolean_t>("lua_pushboolean");
+	return fn(L, b);
 }
 
 /// <summary>
@@ -683,7 +722,8 @@ inline void lua_pushboolean(lua_State* L, int b) {
 /// <returns></returns>
 inline void lua_pushlightuserdata(lua_State* L, void* p) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_pushlightuserdata_t>("lua_pushlightuserdata")(L, p);
+	static auto fn = GetFunc<lua_pushlightuserdata_t>("lua_pushlightuserdata");
+	return fn(L, p);
 }
 
 /// <summary>
@@ -693,7 +733,8 @@ inline void lua_pushlightuserdata(lua_State* L, void* p) {
 /// <returns>1 if the thread is the main thread, 0 otherwise.</returns>
 inline int lua_pushthread(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_pushthread_t>("lua_pushthread")(L);
+	static auto fn = GetFunc<lua_pushthread_t>("lua_pushthread");
+	return fn(L);
 }
 
 /// ============================== ///
@@ -711,7 +752,8 @@ inline int lua_pushthread(lua_State* L) {
 /// <returns></returns>
 inline void lua_gettable(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_gettable_t>("lua_gettable")(L, index);
+	static auto fn = GetFunc<lua_gettable_t>("lua_gettable");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -725,7 +767,8 @@ inline void lua_gettable(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_getfield(lua_State* L, int index, const char* k) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_getfield_t>("lua_getfield")(L, index, k);
+	static auto fn = GetFunc<lua_getfield_t>("lua_getfield");
+	return fn(L, index, k);
 }
 
 /// <summary>
@@ -737,7 +780,8 @@ inline void lua_getfield(lua_State* L, int index, const char* k) {
 /// <returns></returns>
 inline void lua_rawget(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_rawget_t>("lua_rawget")(L, index);
+	static auto fn = GetFunc<lua_rawget_t>("lua_rawget");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -751,7 +795,8 @@ inline void lua_rawget(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_rawgeti(lua_State* L, int index, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_rawgeti_t>("lua_rawgeti")(L, index, n);
+	static auto fn = GetFunc<lua_rawgeti_t>("lua_rawgeti");
+	return fn(L, index, n);
 }
 
 /// <summary>
@@ -764,7 +809,8 @@ inline void lua_rawgeti(lua_State* L, int index, int n) {
 /// <returns></returns>
 inline void lua_createtable(lua_State* L, int narr, int nrec) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_createtable_t>("lua_createtable")(L, narr, nrec);
+	static auto fn = GetFunc<lua_createtable_t>("lua_createtable");
+	return fn(L, narr, nrec);
 }
 
 /// <summary>
@@ -776,7 +822,8 @@ inline void lua_createtable(lua_State* L, int narr, int nrec) {
 /// <returns>The pointer to the userdata.</returns>
 inline void* lua_newuserdata(lua_State* L, size_t sz) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_newuserdata_t>("lua_newuserdata")(L, sz);
+	static auto fn = GetFunc<lua_newuserdata_t>("lua_newuserdata");
+	return fn(L, sz);
 }
 
 /// <summary>
@@ -787,7 +834,8 @@ inline void* lua_newuserdata(lua_State* L, size_t sz) {
 /// <returns>1 if the value has a metatable, 0 otherwise.</returns>
 inline int lua_getmetatable(lua_State* L, int objindex) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getmetatable_t>("lua_getmetatable")(L, objindex);
+	static auto fn = GetFunc<lua_getmetatable_t>("lua_getmetatable");
+	return fn(L, objindex);
 }
 
 /// <summary>
@@ -798,7 +846,8 @@ inline int lua_getmetatable(lua_State* L, int objindex) {
 /// <returns></returns>
 inline void lua_getfenv(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_getfenv_t>("lua_getfenv")(L, index);
+	static auto fn = GetFunc<lua_getfenv_t>("lua_getfenv");
+	return fn(L, index);
 }
 
 /// ============================== ///
@@ -815,7 +864,8 @@ inline void lua_getfenv(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_settable(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_settable_t>("lua_settable")(L, index);
+	static auto fn = GetFunc<lua_settable_t>("lua_settable");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -829,7 +879,8 @@ inline void lua_settable(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_setfield(lua_State* L, int index, const char* k) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_setfield_t>("lua_setfield")(L, index, k);
+	static auto fn = GetFunc<lua_setfield_t>("lua_setfield");
+	return fn(L, index, k);
 }
 
 /// <summary>
@@ -841,7 +892,8 @@ inline void lua_setfield(lua_State* L, int index, const char* k) {
 /// <returns></returns>
 inline void lua_rawset(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_rawset_t>("lua_rawset")(L, index);
+	static auto fn = GetFunc<lua_rawset_t>("lua_rawset");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -855,7 +907,8 @@ inline void lua_rawset(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_rawseti(lua_State* L, int index, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_rawseti_t>("lua_rawseti")(L, index, n);
+	static auto fn = GetFunc<lua_rawseti_t>("lua_rawseti");
+	return fn(L, index, n);
 }
 
 /// <summary>
@@ -866,7 +919,8 @@ inline void lua_rawseti(lua_State* L, int index, int n) {
 /// <returns>1 if the value has a metatable, 0 otherwise.</returns>
 inline int lua_setmetatable(lua_State* L, int objindex) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_setmetatable_t>("lua_setmetatable")(L, objindex);
+	static auto fn = GetFunc<lua_setmetatable_t>("lua_setmetatable");
+	return fn(L, objindex);
 }
 
 /// <summary>
@@ -877,7 +931,8 @@ inline int lua_setmetatable(lua_State* L, int objindex) {
 /// <returns></returns>
 inline int lua_setfenv(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_setfenv_t>("lua_setfenv")(L, index);
+	static auto fn = GetFunc<lua_setfenv_t>("lua_setfenv");
+	return fn(L, index);
 }
 
 /// ============== ///
@@ -902,7 +957,8 @@ inline int lua_setfenv(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_call(lua_State* L, int nargs, int nresults) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_call_t>("lua_call")(L, nargs, nresults);
+	static auto fn = GetFunc<lua_call_t>("lua_call");
+	return fn(L, nargs, nresults);
 }
 
 /// <summary>
@@ -917,7 +973,8 @@ inline void lua_call(lua_State* L, int nargs, int nresults) {
 /// <returns></returns>
 inline int lua_pcall(lua_State* L, int nargs, int nresults, int errfunc) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_pcall_t>("lua_pcall")(L, nargs, nresults, errfunc);
+	static auto fn = GetFunc<lua_pcall_t>("lua_pcall");
+	return fn(L, nargs, nresults, errfunc);
 }
 
 /// <summary>
@@ -932,7 +989,8 @@ inline int lua_pcall(lua_State* L, int nargs, int nresults, int errfunc) {
 /// <returns></returns>
 inline int lua_cpcall(lua_State* L, lua_CFunction func, void* ud) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_cpcall_t>("lua_cpcall")(L, func, ud);
+	static auto fn = GetFunc<lua_cpcall_t>("lua_cpcall");
+	return fn(L, func, ud);
 }
 
 /// <summary>
@@ -948,7 +1006,8 @@ inline int lua_cpcall(lua_State* L, lua_CFunction func, void* ud) {
 /// <returns></returns>
 inline int lua_load(lua_State* L, lua_Reader reader, void* dt, const char* chunkname) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_load_t>("lua_load")(L, reader, dt, chunkname);
+	static auto fn = GetFunc<lua_load_t>("lua_load");
+	return fn(L, reader, dt, chunkname);
 }
 
 /// <summary>
@@ -960,7 +1019,8 @@ inline int lua_load(lua_State* L, lua_Reader reader, void* dt, const char* chunk
 /// <returns></returns>
 inline int lua_dump(lua_State* L, lua_Writer writer, void* data) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_dump_t>("lua_dump")(L, writer, data);
+	static auto fn = GetFunc<lua_dump_t>("lua_dump");
+	return fn(L, writer, data);
 }
 
 /// ================== ///
@@ -975,7 +1035,8 @@ inline int lua_dump(lua_State* L, lua_Writer writer, void* data) {
 /// <returns></returns>
 inline int lua_yield(lua_State* L, int nresults) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_yield_t>("lua_yield")(L, nresults);
+	static auto fn = GetFunc<lua_yield_t>("lua_yield");
+	return fn(L, nresults);
 }
 
 /// <summary>
@@ -987,7 +1048,8 @@ inline int lua_yield(lua_State* L, int nresults) {
 /// <remarks>
 inline int lua_resume(lua_State* L, int narg) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_resume_t>("lua_resume")(L, narg);
+	static auto fn = GetFunc<lua_resume_t>("lua_resume");
+	return fn(L, narg);
 }
 
 /// <summary>
@@ -997,7 +1059,8 @@ inline int lua_resume(lua_State* L, int narg) {
 /// <returns>The status of the coroutine.</returns>
 inline int lua_status(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_status_t>("lua_status")(L);
+	static auto fn = GetFunc<lua_status_t>("lua_status");
+	return fn(L);
 }
 
 /// ================== ///
@@ -1021,7 +1084,8 @@ inline int lua_status(lua_State* L) {
 /// <returns></returns>
 inline int lua_gc(lua_State* L, int what, int data) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_gc_t>("lua_gc")(L, what, data);
+	static auto fn = GetFunc<lua_gc_t>("lua_gc");
+	return fn(L, what, data);
 }
 
 /// ======================= ///
@@ -1036,7 +1100,8 @@ inline int lua_gc(lua_State* L, int what, int data) {
 /// <returns></returns>
 inline int lua_error(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_error_t>("lua_error")(L);
+	static auto fn = GetFunc<lua_error_t>("lua_error");
+	return fn(L);
 }
 
 /// <summary>
@@ -1047,7 +1112,8 @@ inline int lua_error(lua_State* L) {
 /// <returns></returns>
 inline int lua_next(lua_State* L, int index) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_next_t>("lua_next")(L, index);
+	static auto fn = GetFunc<lua_next_t>("lua_next");
+	return fn(L, index);
 }
 
 /// <summary>
@@ -1059,7 +1125,8 @@ inline int lua_next(lua_State* L, int index) {
 /// <returns></returns>
 inline void lua_concat(lua_State* L, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_concat_t>("lua_concat")(L, n);
+	static auto fn = GetFunc<lua_concat_t>("lua_concat");
+	return fn(L, n);
 }
 
 /// <summary>
@@ -1069,7 +1136,8 @@ inline void lua_concat(lua_State* L, int n) {
 /// <returns>The memory allocated for the Lua state.</returns>
 inline lua_Alloc lua_getallocf(lua_State* L, void** ud) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getallocf_t>("lua_getallocf")(L, ud);
+	static auto fn = GetFunc<lua_getallocf_t>("lua_getallocf");
+	return fn(L, ud);
 }
 
 /// <summary>
@@ -1081,7 +1149,8 @@ inline lua_Alloc lua_getallocf(lua_State* L, void** ud) {
 /// <returns></returns>
 inline void lua_setallocf(lua_State* L, lua_Alloc f, void* ud) {
 	using namespace Carbon::Lua::Prototypes;
-	GetFunc<lua_setallocf_t>("lua_setallocf")(L, f, ud);
+	static auto fn = GetFunc<lua_setallocf_t>("lua_setallocf");
+	return fn(L, f, ud);
 }
 
 /// ====== ///
@@ -1125,7 +1194,8 @@ inline void lua_setallocf(lua_State* L, lua_Alloc f, void* ud) {
 /// <returns></returns>
 inline int lua_getstack(lua_State* L, int level, lua_Debug* ar) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getstack_t>("lua_getstack")(L, level, ar);
+	static auto fn = GetFunc<lua_getstack_t>("lua_getstack");
+	return fn(L, level, ar);
 }
 
 /// <summary>
@@ -1137,7 +1207,8 @@ inline int lua_getstack(lua_State* L, int level, lua_Debug* ar) {
 /// <returns>0 on error</returns>
 inline int lua_getinfo(lua_State* L, const char* what, lua_Debug* ar) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getinfo_t>("lua_getinfo")(L, what, ar);
+	static auto fn = GetFunc<lua_getinfo_t>("lua_getinfo");
+	return fn(L, what, ar);
 }
 
 /// <summary>
@@ -1149,7 +1220,8 @@ inline int lua_getinfo(lua_State* L, const char* what, lua_Debug* ar) {
 /// <returns>The name of the local variable.</returns>
 inline const char* lua_getlocal(lua_State* L, const lua_Debug* ar, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getlocal_t>("lua_getlocal")(L, ar, n);
+	static auto fn = GetFunc<lua_getlocal_t>("lua_getlocal");
+	return fn(L, ar, n);
 }
 
 /// <summary>
@@ -1162,7 +1234,8 @@ inline const char* lua_getlocal(lua_State* L, const lua_Debug* ar, int n) {
 /// <returns>The name of the local variable.</returns>
 inline const char* lua_setlocal(lua_State* L, const lua_Debug* ar, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_setlocal_t>("lua_setlocal")(L, ar, n);
+	static auto fn = GetFunc<lua_setlocal_t>("lua_setlocal");
+	return fn(L, ar, n);
 }
 
 /// <summary>
@@ -1174,7 +1247,8 @@ inline const char* lua_setlocal(lua_State* L, const lua_Debug* ar, int n) {
 /// <returns>The name of the upvalue.</returns>
 inline const char* lua_getupvalue(lua_State* L, int funcindex, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_getupvalue_t>("lua_getupvalue")(L, funcindex, n);
+	static auto fn = GetFunc<lua_getupvalue_t>("lua_getupvalue");
+	return fn(L, funcindex, n);
 }
 
 /// <summary>
@@ -1186,7 +1260,8 @@ inline const char* lua_getupvalue(lua_State* L, int funcindex, int n) {
 /// <returns>The name of the upvalue.</returns>
 inline const char* lua_setupvalue(lua_State* L, int funcindex, int n) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_setupvalue_t>("lua_setupvalue")(L, funcindex, n);
+	static auto fn = GetFunc<lua_setupvalue_t>("lua_setupvalue");
+	return fn(L, funcindex, n);
 }
 
 /// <summary>
@@ -1199,7 +1274,8 @@ inline const char* lua_setupvalue(lua_State* L, int funcindex, int n) {
 /// <returns>1 if the hook was set, 0 otherwise.</returns>
 inline int lua_sethook(lua_State* L, lua_Hook func, int mask, int count) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_sethook_t>("lua_sethook")(L, func, mask, count);
+	static auto fn = GetFunc<lua_sethook_t>("lua_sethook");
+	return fn(L, func, mask, count);
 }
 
 /// <summary>
@@ -1209,7 +1285,8 @@ inline int lua_sethook(lua_State* L, lua_Hook func, int mask, int count) {
 /// <returns>The debug hook function.</returns>
 inline lua_Hook lua_gethook(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_gethook_t>("lua_gethook")(L);
+	static auto fn = GetFunc<lua_gethook_t>("lua_gethook");
+	return fn(L);
 }
 
 /// <summary>
@@ -1219,7 +1296,8 @@ inline lua_Hook lua_gethook(lua_State* L) {
 /// <returns>The debug hook mask.</returns>
 inline int lua_gethookmask(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_gethookmask_t>("lua_gethookmask")(L);
+	static auto fn = GetFunc<lua_gethookmask_t>("lua_gethookmask");
+	return fn(L);
 }
 
 /// <summary>
@@ -1229,5 +1307,6 @@ inline int lua_gethookmask(lua_State* L) {
 /// <returns>The debug hook count.</returns>
 inline int lua_gethookcount(lua_State* L) {
 	using namespace Carbon::Lua::Prototypes;
-	return GetFunc<lua_gethookcount_t>("lua_gethookcount")(L);
+	static auto fn = GetFunc<lua_gethookcount_t>("lua_gethookcount");
+	return fn(L);
 }
