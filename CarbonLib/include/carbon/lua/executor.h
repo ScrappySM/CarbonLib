@@ -63,8 +63,13 @@ public:
 	/// Queues a function to be called when the Lua VM is updated.
 	/// </summary>
 	/// <param name="func">The function to call.</param>
-	void OnUpdate(std::function<void(lua_State*)> func) {
-		this->updateFuncs.push(func);
+	void OnUpdate(std::function<void(lua_State*)> func, bool removeAfterExecution = false) {
+		if (removeAfterExecution) {
+			this->tempUpdateFuncs.push(func);
+		}
+		else {
+			this->updateFuncs.emplace_back(func);
+		}
 	}
 
 	/// <summary>
@@ -74,20 +79,24 @@ public:
 	/// <param name="func">The function to call.</param>
 	/// <param name="immediateIfPlaying">Whether to also call the function immediately if the game is already playing.</param>
 	void OnInitialize(std::function<void(lua_State*)> func, bool immediateIfPlaying = true) {
-		this->initFuncs.push_back(func);
+		this->initFuncs.emplace_back(func);
 
 		if (immediateIfPlaying && Carbon::SM::Contraption::IsPlaying()) {
 			INFO("Game is already playing, calling supposed init function immediately");
-			this->updateFuncs.push(func);
+			this->tempUpdateFuncs.push(func); // Only call once
 		}
 	}
 
 private:
 	void Update(lua_State* L) {
-		while (!this->updateFuncs.empty()) {
-			auto& func = this->updateFuncs.front();
+		while (!this->tempUpdateFuncs.empty()) {
+			auto& func = this->tempUpdateFuncs.front();
 			func(L);
-			this->updateFuncs.pop();
+			this->tempUpdateFuncs.pop();
+		}
+
+		for (auto& func : this->updateFuncs) {
+			func(L);
 		}
 	}
 
@@ -131,6 +140,8 @@ private:
 	std::optional<PLH::NatDetour> updateDetour = std::nullopt;
 	std::optional<PLH::NatDetour> initDetour = std::nullopt;
 
-	std::queue<std::function<void(lua_State*)>> updateFuncs;
+	std::queue<std::function<void(lua_State*)>> tempUpdateFuncs;
+
+	std::vector<std::function<void(lua_State*)>> updateFuncs;
 	std::vector<std::function<void(lua_State*)>> initFuncs;
 };
