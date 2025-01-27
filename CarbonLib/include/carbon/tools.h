@@ -19,6 +19,6 @@ void LOG(Carbon::SM::UTILS::Colour colour, Carbon::SM::UTILS::LogType type, cons
 	}
 }
 
-#define INFO(...) LOG(Carbon::SM::UTILS::Colour::GREEN, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
-#define WARN(...) LOG(Carbon::SM::UTILS::Colour::YELLOW, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
-#define WARN(...) LOG(Carbon::SM::UTILS::Colour::RED, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
+#define CINFO(...) LOG(Carbon::SM::UTILS::Colour::GREEN, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
+#define CWARN(...) LOG(Carbon::SM::UTILS::Colour::YELLOW, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
+#define CERROR(...) LOG(Carbon::SM::UTILS::Colour::RED, Carbon::SM::UTILS::LogType::Default, __VA_ARGS__)
