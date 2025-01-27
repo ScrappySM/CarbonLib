@@ -22,16 +22,12 @@
 			if constexpr (guaranteed) { \
 				auto t = *reinterpret_cast<type**>(Carbon::Offsets::Rebased::type); \
 				while (!t == nullptr) { \
-					Carbon::SM::UTILS::CERROR("Failed to get instance of {}", #type); \
-					Sleep(1000); \
+					Sleep(100); \
+					t = *reinterpret_cast<type**>(Carbon::Offsets::Rebased::type); \
 				}\
 				return t; \
 			} \
 			else { \
 				return *reinterpret_cast<type**>(Carbon::Offsets::Rebased::type); \
 			} \
-			auto instance = *reinterpret_cast<type**>(Carbon::Offsets::Rebased::type); \
-			while (!instance) { \
-				instance = *reinterpret_cast<type**>(Carbon::Offsets::Rebased::type); \
-			} \
-			return instance; \
+	}
