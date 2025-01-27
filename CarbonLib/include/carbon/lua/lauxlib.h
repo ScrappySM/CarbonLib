@@ -82,6 +82,7 @@ namespace Carbon::Lua::Prototypes {
 	typedef void (luaL_addstring_t)(luaL_Buffer* B, const char* s);
 	typedef void (luaL_addvalue_t)(luaL_Buffer* B);
 	typedef void (luaL_pushresult_t)(luaL_Buffer* B);
+	typedef void (luaL_openlibs_t)(lua_State* L);
 } // namespace Carbon::Lua::Prototypes
 
 /// <summary>
@@ -525,6 +526,17 @@ inline void luaL_pushresult(luaL_Buffer* B) {
 	using namespace Carbon::Lua::Prototypes;
 	static auto fn = GetFunc<luaL_pushresult_t>("luaL_pushresult");
 	return fn(B);
+}
+
+/// <summary>
+/// Opens the libraries.
+/// </summary>
+/// <param name="L">The Lua state.</param>
+/// <returns></returns>
+inline void luaL_openlibs(lua_State* L) {
+	using namespace Carbon::Lua::Prototypes;
+	static auto fn = GetFunc<luaL_openlibs_t>("luaL_openlibs");
+	return fn(L);
 }
 
 /// ============= ///

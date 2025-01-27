@@ -158,6 +158,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\carbon\lua\executor.h" />
     <ClInclude Include="include\carbon\console.h" />
     <ClInclude Include="include\carbon\contraption.h" />
     <ClInclude Include="include\carbon\lua\lua.h" />
