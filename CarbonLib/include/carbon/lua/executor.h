@@ -82,7 +82,7 @@ public:
 		this->initFuncs.emplace_back(func);
 
 		if (immediateIfPlaying && Carbon::SM::Contraption::IsPlaying()) {
-			INFO("Game is already playing, calling supposed init function immediately");
+			CINFO("Game is already playing, calling supposed init function immediately");
 			this->tempUpdateFuncs.push(func); // Only call once
 		}
 	}
@@ -121,7 +121,7 @@ private:
 	static inline uint64_t hkLoadLuaEnvFuncTramp = NULL;
 	static __declspec(noinline) uint64_t __cdecl hkLoadLuaEnvFunc(uint64_t* luaVM, uint64_t** loadFuncs, int envFlag) {
 		auto oRes = PLH::FnCast(hkLoadLuaEnvFuncTramp, &hkLoadLuaEnvFunc)(luaVM, loadFuncs, envFlag);
-		INFO("LoadLuaEnv({}, {}, {})", (void*)luaVM, (void*)loadFuncs, envFlag);
+		CINFO("LoadLuaEnv({}, {}, {})", (void*)luaVM, (void*)loadFuncs, envFlag);
 
 		auto& luaVMPtr = LuaManager::GetInstance()->luaVM;
 		if (!luaVMPtr) return oRes;
